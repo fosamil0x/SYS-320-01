@@ -58,11 +58,10 @@ if ($choices -contains $choice){
     elseif($choice -eq 4){
         # run the chrome script
         . $chromeRunScriptPath
-
+    }
 }
 else{
 Write-Host "Invalid choice. Please select one of the operations." | Out-String
 }
 
-}
 }
