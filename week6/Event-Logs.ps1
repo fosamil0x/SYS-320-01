@@ -65,6 +65,36 @@ function getFailedLogins($timeBack){
     return $failedloginsTable
 } # End of function getFailedLogins
 
+# I made another getFailedLogins for the Turn to Menu assignment
+function getFailedLoginsMenu(){
+  
+  $failedlogins = Get-EventLog security | Where { $_.InstanceID -eq "4625" }
+
+  $failedloginsTable = @()
+  for($i=0; $i -lt $failedlogins.Count; $i++){
+
+    $account=""
+    $domain="" 
+
+    $usrlines = getMatchingLines $failedlogins[$i].Message "*Account Name*"
+    $usr = $usrlines[1].Split(":")[1].trim()
+
+    $dmnlines = getMatchingLines $failedlogins[$i].Message "*Account Domain*"
+    $dmn = $dmnlines[1].Split(":")[1].trim()
+
+    $user = $dmn+"\"+$usr;
+
+    $failedloginsTable += [pscustomobject]@{"Time" = $failedlogins[$i].TimeGenerated; `
+                                       "Id" = $failedlogins[$i].InstanceId; `
+                                    "Event" = "Failed"; `
+                                     "User" = $user;
+                                     }
+
+    }
+
+    return $failedloginsTable
+} # End of function getFailedLogins
+
 function getAtRisk($days){
 #provide a start date
 $startDate = (Get-Date).AddDays(-$days)
