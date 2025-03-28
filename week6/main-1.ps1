@@ -54,11 +54,13 @@ if ($choices -contains $choice){
         #              - If false is returned, continue with the rest of the function
         #              - If true is returned, do not continue and inform the user
         $name = Read-Host -Prompt "Please enter the username for the new user"
+        #Write-Host $name
         $checkUser = checkUser $name
+        Write-host $checkUser
         if ($checkUser -eq $false){
            Write-Host "User does not yet exist. Continuing..." | Out-String
            $password = Read-Host -AsSecureString -Prompt "Please enter the password for the new user"
-           }
+           
            
            $checkPassword = checkPassword $password
            if ($checkPassword -eq $true){
@@ -66,8 +68,9 @@ if ($choices -contains $choice){
                 createAUser $name $password
                 Write-Host "User: $name is created." | Out-String
                 }
+            }
 
-        else{
+        if($checkUser -eq $true){
             Write-Host "Create User Failed. Use a unique username and a password that meets the requirements. Exiting..."}
 
         # TODO: Create a function called checkPassword in String-Helper that:
