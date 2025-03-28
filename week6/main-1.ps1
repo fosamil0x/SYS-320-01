@@ -56,7 +56,6 @@ if ($choices -contains $choice){
         $name = Read-Host -Prompt "Please enter the username for the new user"
         #Write-Host $name
         $checkUser = checkUser $name
-        Write-host $checkUser
         if ($checkUser -eq $false){
            Write-Host "User does not yet exist. Continuing..." | Out-String
            $password = Read-Host -AsSecureString -Prompt "Please enter the password for the new user"
