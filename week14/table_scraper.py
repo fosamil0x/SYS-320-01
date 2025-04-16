@@ -1,4 +1,12 @@
-﻿import requests
+'''
+Things to install:
+	- python3 | sudo apt install python3
+	- pip | sudo apt install python3-pip
+	- beautifulsoup4 | pip install beautifulsoup4
+	- requests | pip install requests
+'''
+
+import requests
 from bs4 import BeautifulSoup
 
 
