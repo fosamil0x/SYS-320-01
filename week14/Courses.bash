@@ -10,7 +10,7 @@ fullPage=$(curl -sL "$link")
 toolOutput=$(echo "$fullPage" | \
 xmlstarlet format --html --recover 2>/dev/null | \
 xmlstarlet select --template --copy-of \
-"//html//body//div//div//table//tr")
+"//html//body//table//tr")
 
 # Processing HTML with sed
 # 1- Replacing every </tr> with a line break
